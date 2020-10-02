@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div :class="{ 'd-none': $route.path === '/login' }">
+    <div :class="{ 'd-none': $route.path === '/' }">
       <b-navbar toggleable="lg" type="dark" variant="primary">
         <b-navbar-brand href="#">Matrix</b-navbar-brand>
 
