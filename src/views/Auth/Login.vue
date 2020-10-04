@@ -5,7 +5,7 @@
         <div>
           <b-card-group deck>
             <b-card title="Login">
-              <b-form @submit="onSubmit" v-if="show">
+              <b-form>
                 <b-row align-h="center" align-v="center">
                   <b-col sm="5">
                     <b-form-group id="input-group-1">
@@ -26,7 +26,9 @@
                       ></b-form-input>
                     </b-form-group>
 
-                    <b-button type="submit" variant="primary">Entrar</b-button>
+                    <b-button @click="Login()" variant="primary"
+                      >Entrar</b-button
+                    >
                   </b-col>
                 </b-row>
               </b-form>
@@ -55,9 +57,23 @@ export default {
     };
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      this.$router.push({ name: "Home" });
+    Login() {
+      this.axios
+        .post("login", {
+          email: this.form.email,
+          password: this.form.password,
+        })
+        .then((res) => {
+          return res.data;
+        })
+        .then((data) => {
+          this.$store.dispatch("saveToken", data.token);
+          console.log(data);
+          // this.$router.push({ name: "Home" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
