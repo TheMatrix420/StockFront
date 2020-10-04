@@ -4,7 +4,7 @@ import decode from "jwt-decode";
 import router from "../router";
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     token: "",
     usuario: "",
@@ -40,3 +40,5 @@ export default new Vuex.Store({
   },
   modules: {},
 });
+
+export default store;

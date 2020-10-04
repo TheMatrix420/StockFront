@@ -5,7 +5,7 @@
         <div>
           <b-card-group deck>
             <b-card title="Login">
-              <b-form v-if="show">
+              <b-form>
                 <b-row align-h="center" align-v="center">
                   <b-col sm="5">
                     <b-form-group id="input-group-1">
@@ -26,7 +26,7 @@
                       ></b-form-input>
                     </b-form-group>
 
-                    <b-button @click="Login" type="submit" variant="primary"
+                    <b-button @click="Login()" variant="primary"
                       >Entrar</b-button
                     >
                   </b-col>
@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
@@ -59,18 +58,18 @@ export default {
   },
   methods: {
     Login() {
-      axios
+      this.axios
         .post("login", {
-          email: this.email,
-          password: this.password,
+          email: this.form.email,
+          password: this.form.password,
         })
         .then((res) => {
           return res.data;
-          console.log(res.data);
         })
         .then((data) => {
           this.$store.dispatch("saveToken", data.token);
-          this.$router.push({ name: "Home" });
+          console.log(data);
+          // this.$router.push({ name: "Home" });
         })
         .catch((err) => {
           console.log(err);
