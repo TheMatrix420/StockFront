@@ -14,7 +14,7 @@ const routes = [
     component: Home,
     meta: {
       title: "Home",
-      user: true,
+      auth: true,
     },
   },
   {
@@ -23,7 +23,7 @@ const routes = [
     component: About,
     meta: {
       title: "About",
-      administrador: true,
+      auth: true,
     },
   },
   {
@@ -32,7 +32,8 @@ const routes = [
     component: Login,
     meta: {
       title: "Login",
-      free: true,
+      auth: false,
+      guest: true,
     },
   },
 ];
@@ -43,20 +44,38 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.free)) {
-    next();
-  } else if (store.state.usuario && store.state.usuario.role == "user_role") {
-    if (to.matched.some((record) => record.meta.user)) {
-      next();
-    }
-  } else if (store.state.usuario && store.state.usuario.role == "admin_role") {
-    if (to.matched.some((record) => record.meta.administrador)) {
-      next();
-    }
-  } else {
+// router.beforeEach((to, from, next) => {
+//   window.document.title = to.meta.title
+//     ? `${to.meta.title} · Matrixtock`
+//     : "Matrixtock";
+
+//   if (to.matched.some((record) => record.meta.free)) {
+//     next();
+//   } else if (store.state.usuario && store.state.usuario.role == "user_role") {
+//     if (to.matched.some((record) => record.meta.user)) {
+//       next();
+//     }
+//   } else if (store.state.usuario && store.state.usuario.role == "admin_role") {
+//     if (to.matched.some((record) => record.meta.administrador)) {
+//       next();
+//     }
+//   } else {
+//     next({ name: "Login" });
+//   }
+// });
+
+router.beforeEach(async (to, from, next) => {
+  window.document.title = to.meta.title
+    ? `${to.meta.title} · Matrixtock`
+    : "Matrixtock";
+
+  if (to.meta.auth && !localStorage.getItem("token")) {
     next({ name: "Login" });
   }
+  if (to.meta.guest && localStorage.getItem("token")) {
+    next({ name: "Home" });
+  }
+  next();
 });
 
 export default router;

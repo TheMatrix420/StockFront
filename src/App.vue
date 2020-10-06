@@ -17,7 +17,7 @@
                 <em>User</em>
               </template>
               <b-dropdown-item href="#">Perfil</b-dropdown-item>
-              <b-dropdown-item to="/login">Cerrar Sesión</b-dropdown-item>
+              <b-dropdown-item @click="logout()">Cerrar Sesión</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -26,7 +26,18 @@
     <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  // created() {
+  //   this.$store.dispatch("autoLogin");
+  // },
+  methods:{
+    logout(){
+      this.$store.dispatch("logout");
+    }
+  }
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

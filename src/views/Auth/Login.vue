@@ -67,9 +67,13 @@ export default {
           return res.data;
         })
         .then((data) => {
-          this.$store.dispatch("saveToken", data.token);
-          console.log(data);
-          // this.$router.push({ name: "Home" });
+          if (data.status === 200) {
+            this.$store.dispatch("saveToken", data.token);
+            this.$router.push({ name: "Home" });
+          } else {
+            let err = { code: data.status, message: data.err.message };
+            throw err;
+          }
         })
         .catch((err) => {
           console.log(err);
