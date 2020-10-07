@@ -1,6 +1,7 @@
-const express = require("express");
-const serveStatic = require("serve-static");
-const path = require("path");
+import express from "express";
+import serveStatic from "serve-static";
+import path from "path";
+
 require("./config/config");
 const app = express();
 
