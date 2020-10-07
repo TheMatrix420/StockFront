@@ -1,7 +1,6 @@
-import express from "express";
-import serveStatic from "serve-static";
-import path from "path";
-
+const express = require("express");
+const serveStatic = require("serve-static");
+const path = require("path");
 require("./config/config");
 const app = express();
 
@@ -13,6 +12,5 @@ app.get(/.*/, function(req, res) {
   res.sendFile(path.join(__dirname, "/dist/index.html"));
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Se esta escuchando el puerto ${process.env.PORT}`);
-});
+app.listen(process.env.PORT);
+console.log(`app is listening on port: ${process.env.PORT}`);
