@@ -1,13 +1,43 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div :class="{ 'd-none': $route.path === '/' }">
+      <b-navbar toggleable="lg" type="dark" variant="primary">
+        <b-navbar-brand href="#">Matrix</b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <router-link to="/" class="nav-link">Inicio</router-link>
+            <router-link to="/about" class="nav-link">About</router-link>
+          </b-navbar-nav>
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item-dropdown right>
+              <template v-slot:button-content>
+                <em>User</em>
+              </template>
+              <b-dropdown-item href="#">Perfil</b-dropdown-item>
+              <b-dropdown-item @click="logout()">Cerrar Sesión</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  // created() {
+  //   this.$store.dispatch("autoLogin");
+  // },
+  methods:{
+    logout(){
+      this.$store.dispatch("logout");
+    }
+  }
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

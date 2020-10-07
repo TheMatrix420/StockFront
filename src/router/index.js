@@ -1,29 +1,81 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home";
+import About from "../views/About";
+import Login from "../views/Auth/Login";
+import store from "../store";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/home",
+    name: "Home",
+    component: Home,
+    meta: {
+      title: "Home",
+      auth: true,
+    },
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: "/about",
+    name: "About",
+    component: About,
+    meta: {
+      title: "About",
+      auth: true,
+    },
+  },
+  {
+    path: "/",
+    name: "Login",
+    component: Login,
+    meta: {
+      title: "Login",
+      auth: false,
+      guest: true,
+    },
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+// router.beforeEach((to, from, next) => {
+//   window.document.title = to.meta.title
+//     ? `${to.meta.title} · Matrixtock`
+//     : "Matrixtock";
+
+//   if (to.matched.some((record) => record.meta.free)) {
+//     next();
+//   } else if (store.state.usuario && store.state.usuario.role == "user_role") {
+//     if (to.matched.some((record) => record.meta.user)) {
+//       next();
+//     }
+//   } else if (store.state.usuario && store.state.usuario.role == "admin_role") {
+//     if (to.matched.some((record) => record.meta.administrador)) {
+//       next();
+//     }
+//   } else {
+//     next({ name: "Login" });
+//   }
+// });
+
+router.beforeEach(async (to, from, next) => {
+  window.document.title = to.meta.title
+    ? `${to.meta.title} · Matrixtock`
+    : "Matrixtock";
+
+  if (to.meta.auth && !localStorage.getItem("token")) {
+    next({ name: "Login" });
+  }
+  if (to.meta.guest && localStorage.getItem("token")) {
+    next({ name: "Home" });
+  }
+  next();
+});
+
+export default router;
