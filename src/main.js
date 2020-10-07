@@ -11,7 +11,7 @@ Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-axios.defaults.baseURL = process.env.URL_BASE || "http://localhost:4000/api/";
+axios.defaults.baseURL = "https://matrixtock.herokuapp.com/api/";
 
 Vue.config.productionTip = false;
 
