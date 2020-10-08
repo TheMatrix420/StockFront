@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home";
 import About from "../views/About";
 import Login from "../views/Auth/Login";
+import RegistroUser from "../views/Auth/RegistroUser";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -34,6 +35,15 @@ const routes = [
       title: "Login",
       auth: false,
       guest: true,
+    },
+  },
+  {
+    path: "/registro",
+    name: "Registro",
+    component: RegistroUser,
+    meta: {
+      title: "Registro Usuario",
+      auth: false,
     },
   },
 ];
