@@ -1,47 +1,92 @@
 <template>
-  <div class="mt-5">
-    <b-row align-h="center" align-v="center">
-      <b-col sm="4">
-        <div>
-          <b-card-group deck>
-            <b-card title="Login">
+  <div>
+    <!-- Header -->
+    <!-- <div class="header bg-gradient-success py-7 py-lg-8 pt-lg-9">
+      <b-container>
+        <div class="header-body text-center mb-7">
+          <b-row class="justify-content-center">
+            <b-col xl="5" lg="6" md="8" class="px-5">
+              <h1 class="text-dark">Welcome!</h1>
+              <p class="text-lead text-dark">
+                Lorem ipsum, dolor sit amet consectetur adipisicing
+                elit.oloribus quos impedit repellat dignissimos
+              </p>
+            </b-col>
+          </b-row>
+        </div>
+      </b-container>
+    </div> -->
+    <!-- Page content -->
+    <b-container class="mt-8 pb-5">
+      <b-row class="justify-content-center">
+        <b-col lg="5" md="7">
+          <b-card no-body class="border-0 mb-0">
+            <div class="text-muted text-center mt-2 mb-0">
+              <h5>Sign in with</h5>
+            </div>
+            <b-card-body class="px-lg-4 py-lg-4">
               <b-form>
-                <b-row align-h="center" align-v="center">
-                  <b-col sm="5">
-                    <b-form-group id="input-group-1">
-                      <b-form-input
-                        v-model="form.email"
-                        type="email"
-                        required
-                        placeholder="Ingresa Correo"
-                      ></b-form-input>
-                    </b-form-group>
+                <b-input-group size="lg" class="mb-3">
+                  <b-input-group-prepend is-text>
+                    <b-icon icon="envelope"></b-icon>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="email"
+                    :rules="{ required: true, email: true }"
+                    placeholder="me@example.com"
+                    v-model="form.email"
+                  >
+                  </b-form-input>
+                </b-input-group>
 
-                    <b-form-group id="input-group-2">
-                      <b-form-input
-                        v-model="form.password"
-                        type="password"
-                        required
-                        placeholder="Ingresa Contraseña"
-                      ></b-form-input>
-                    </b-form-group>
+                <b-input-group size="lg" class="mb-3">
+                  <b-input-group-prepend is-text>
+                    <b-icon icon="lock-fill"></b-icon>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    name="Password"
+                    :rules="{ required: true, min: 6 }"
+                    type="password"
+                    placeholder="Password"
+                    v-model="form.password"
+                  >
+                  </b-form-input>
+                </b-input-group>
 
-                    <b-button @click="Login()" variant="primary"
-                      >Entrar</b-button
-                    >
-                  </b-col>
+                <b-input-group>
+                  <b-form-checkbox>Remember me</b-form-checkbox>
+                </b-input-group>
+
+                <b-row class=" justify-content-around mt-3">
+                  <b-button @click="Login()" variant="primary">Entrar</b-button>
+                  <b-button variant="success">Registrarse</b-button>
                 </b-row>
               </b-form>
-            </b-card>
-          </b-card-group>
-        </div>
-        <div>
-          <b-card class="mt-3" header="Form Data Result">
-            <pre class="m-0">{{ form }}</pre>
+              <hr class="border " />
+              <b-card class="border-0 mb-0">
+                <div class="text-center text-muted mb-0">
+                  <small>Or sign in with credentials</small>
+                </div>
+                <div class="btn-wrapper text-center">
+                  <a href="#" class="btn btn-neutral btn-icon">
+                    <span class="btn-inner--icon"
+                      ><img src="img/icons/github.svg"
+                    /></span>
+                    <span class="btn-inner--text">Github</span>
+                  </a>
+                  <a href="#" class="btn btn-neutral btn-icon">
+                    <span class="btn-inner--icon"
+                      ><img src="img/icons/google.svg"
+                    /></span>
+                    <span class="btn-inner--text">Google</span>
+                  </a>
+                </div>
+              </b-card>
+            </b-card-body>
           </b-card>
-        </div>
-      </b-col>
-    </b-row>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -54,6 +99,10 @@ export default {
         password: "",
       },
       show: true,
+      model: {
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
@@ -69,9 +118,14 @@ export default {
         .then((data) => {
           if (data.status === 200) {
             this.$store.dispatch("saveToken", data.token);
-            this.$router.push({ name: "Home" });
+            this.$router.push({
+              name: "Home",
+            });
           } else {
-            let err = { code: data.status, message: data.err.message };
+            let err = {
+              code: data.status,
+              message: data.err.message,
+            };
             throw err;
           }
         })
