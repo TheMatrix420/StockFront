@@ -46,11 +46,9 @@
                 <b-button variant="success">Registrarse</b-button>
               </div>
             </b-row>
-          </b-form>
-          <hr class="border " />
-          <b-card class="border-0">
+            <hr class="border"/>
             <div class="text-center text-muted ">
-              <small>Or sign in with credentials</small>
+              <small>O inicie sesión con</small>
             </div>
             <div class="btn-wrapper text-center">
               <a href="#" class="btn btn-neutral btn-icon">
@@ -66,7 +64,7 @@
                 <span class="btn-inner--text">Google</span>
               </a>
             </div>
-          </b-card>
+          </b-form>
         </b-card-body>
       </b-card>
     </b-row>
