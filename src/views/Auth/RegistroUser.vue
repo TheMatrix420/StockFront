@@ -1,82 +1,108 @@
 <template>
-  <div class="mt-5">
-    <b-card bg-variant="light">
-      <b-form @submit="onSubmit">
-        <b-form-group
-          label-cols-lg="3"
-          label="Registrate"
-          label-size="lg"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-group
-            label-cols-sm="3"
-            label="Nombre:"
-            label-align-sm="right"
-          >
-            <b-form-input
-              v-model="form.firt_name"
-              required
-              placeholder="Ingrese su nombre"
-            >
-            </b-form-input>
-          </b-form-group>
+  <b-container>
+    <b-row class="vh-100" align-v="center" align-h="center">
+      <b-card class="border-1 " style="max-width: 22rem;">
+        <div class="text-muted text-center mt-2 mb-0">
+          <h3>Matrixtock</h3>
+        </div>
+        <b-card-body class="">
+          <b-form>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend is-text>
+                <b-icon icon="person"></b-icon>
+              </b-input-group-prepend>
+              <b-form-input
+                type="text"
+                placeholder="Ingrese Su Nombre"
+                v-model="form.firt_name"
+              >
+              </b-form-input>
+            </b-input-group>
 
-          <b-form-group
-            label-cols-sm="3"
-            label="Apellido:"
-            label-align-sm="right"
-          >
-            <b-form-input
-              v-model="form.last_name"
-              required
-              placeholder="ingrese su apellido"
-            ></b-form-input>
-          </b-form-group>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend is-text>
+                <b-icon icon="person"></b-icon>
+              </b-input-group-prepend>
+              <b-form-input
+                type="text"
+                placeholder="Ingrese su apellido"
+                v-model="form.last_name"
+              >
+              </b-form-input>
+            </b-input-group>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend is-text>
+                <b-icon icon="envelope"></b-icon>
+              </b-input-group-prepend>
+              <b-form-input
+                type="email"
+                :rules="{ required: true, email: true }"
+                placeholder="Ejemplo@hotmail.com"
+                v-model="form.email"
+              >
+              </b-form-input>
+            </b-input-group>
 
-          <b-form-group
-            label-cols-sm="3"
-            label="Correo:"
-            label-align-sm="right"
-          >
-            <b-form-input
-              v-model="form.email"
-              type="email"
-              required
-              placeholder="Ejmplo@hotmail.com"
-            ></b-form-input>
-          </b-form-group>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend is-text>
+                <b-icon icon="lock-fill"></b-icon>
+              </b-input-group-prepend>
+              <b-form-input
+                name="Password"
+                :rules="{ required: true, min: 6 }"
+                type="password"
+                placeholder="Ingrese su contraseña"
+              >
+              </b-form-input>
+            </b-input-group>
 
-          <b-form-group
-            label-cols-sm="3"
-            label="Contraseña:"
-            label-align-sm="right"
-            placeholder="contraseña"
-          >
-            <b-form-input
-              v-model="form.password"
-              type="password"
-            ></b-form-input>
-            <div class="m-5">
-              <b-row>
-                <b-col lg="12" class="pb-2">
-                  <b-button type="submit" variant="success">Submit</b-button>
-                </b-col>
-              </b-row>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend is-text>
+                <b-icon icon="lock-fill"></b-icon>
+              </b-input-group-prepend>
+              <b-form-input
+                name="Password"
+                :rules="{ required: true, min: 6 }"
+                type="password"
+                placeholder="Repita su Contraseña"
+                v-model="form.password"
+              >
+              </b-form-input>
+            </b-input-group>
+
+            <b-row class="justify-content-center">
+              <div class="mr-2 mb-1">
+                <b-button @click="Login()" variant="success"
+                  >Registrarse</b-button
+                >
+              </div>
+              <div class="ml-2">
+                 <router-link to="/" class="btn btn-primary">Volver</router-link>
+              </div>
+            </b-row>
+            <hr class="border" />
+            <div class="text-center text-muted ">
+              <small>O Registrarse con</small>
             </div>
-          </b-form-group>
-        </b-form-group>
-      </b-form>
-    </b-card>
-
-    <template>
-      <div>
-        <b-card class="mt-3" header="Form Data Result">
-          <pre class="m-0">{{ form }}</pre>
-        </b-card>
-      </div>
-    </template>
-  </div>
+            <div class="btn-wrapper text-center">
+              <a href="#" class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon"
+                  ><img src="img/icons/github.svg"
+                /></span>
+                <span class="btn-inner--text">Github</span>
+              </a>
+              <a href="#" class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon"
+                  ><img src="img/icons/google.svg"
+                /></span>
+                <span class="btn-inner--text">Google</span>
+              </a>
+            </div>
+          </b-form>
+        </b-card-body>
+      </b-card>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

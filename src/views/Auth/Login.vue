@@ -40,10 +40,10 @@
 
             <b-row class="justify-content-center">
               <div class="mr-2 mb-1">
-                <b-button @click="Login()" variant="primary">Entrar</b-button>
+                <b-button @click="Login()" variant="success">Entrar</b-button>
               </div>
               <div class="ml-2">
-                <b-button variant="success">Registrarse</b-button>
+                 <router-link to="/registro" class="btn btn-primary">Registrarse</router-link>
               </div>
             </b-row>
             <hr class="border"/>
