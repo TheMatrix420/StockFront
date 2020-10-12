@@ -1,67 +1,57 @@
 <template>
   <b-container>
     <b-row class="vh-100" align-v="center" align-h="center">
-      <b-card class="border-1 " style="max-width: 22rem;">
-        <div class="text-muted text-center mt-2 mb-0">
-          <h3>Matrixtock</h3>
+      <b-card>
+        <div class="text-muted text-center my-2">
+          <h2>Matrixtock</h2>
         </div>
-        <b-card-body class="">
+        <b-card-body>
           <b-form>
             <b-input-group class="mb-3">
-              <b-input-group-prepend is-text>
-                <b-icon icon="envelope"></b-icon>
-              </b-input-group-prepend>
               <b-form-input
                 type="email"
                 :rules="{ required: true, email: true }"
-                placeholder="me@example.com"
+                placeholder="Ingresa tu correo"
                 v-model="form.email"
               >
               </b-form-input>
             </b-input-group>
 
             <b-input-group class="mb-3">
-              <b-input-group-prepend is-text>
-                <b-icon icon="lock-fill"></b-icon>
-              </b-input-group-prepend>
               <b-form-input
                 name="Password"
                 :rules="{ required: true, min: 6 }"
                 type="password"
-                placeholder="Password"
+                placeholder="Ingresa tu contraseña"
                 v-model="form.password"
               >
               </b-form-input>
             </b-input-group>
 
-            <!-- <b-input-group>
-                  <b-form-checkbox>Remember me</b-form-checkbox>
-                </b-input-group> -->
-
-            <b-row class="justify-content-center">
-              <div class="mr-2 mb-1">
-                <b-button @click="Login()" variant="success">Entrar</b-button>
+            <b-row class="justify-content-around">
+              <div class="my-2">
+                <b-button @click="Login()" variant="success" size="sm"
+                  >Entrar</b-button
+                >
               </div>
-              <div class="ml-2">
-                 <router-link to="/registro" class="btn btn-primary">Registrarse</router-link>
+              <div class="my-2">
+                <b-button to="/registro" variant="primary" size="sm"
+                  >Regístrate</b-button
+                >
               </div>
             </b-row>
-            <hr class="border"/>
-            <div class="text-center text-muted ">
-              <small>O inicie sesión con</small>
+
+            <div class="border my-3"></div>
+
+            <div class="text-center text-muted">
+              <small>O inicia sesión con</small>
             </div>
-            <div class="btn-wrapper text-center">
-              <a href="#" class="btn btn-neutral btn-icon">
-                <span class="btn-inner--icon"
-                  ><img src="img/icons/github.svg"
-                /></span>
-                <span class="btn-inner--text">Github</span>
+            <div>
+              <a href="#" class="btn btn-light">
+                <i class="fab fa-facebook-square"></i>
               </a>
-              <a href="#" class="btn btn-neutral btn-icon">
-                <span class="btn-inner--icon"
-                  ><img src="img/icons/google.svg"
-                /></span>
-                <span class="btn-inner--text">Google</span>
+              <a href="#" class="btn btn-light">
+                <i class="fab fa-google"></i>
               </a>
             </div>
           </b-form>
@@ -79,7 +69,6 @@ export default {
         email: "",
         password: "",
       },
-      show: true,
     };
   },
   methods: {
