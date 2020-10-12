@@ -80,6 +80,7 @@
                     />
                   </div>
                 </div>
+
                 <button type="submit" class="btn btn-block btn-success mb-2">
                   Registrarse
                 </button>
@@ -119,17 +120,28 @@ export default {
         password: this.form.password,
       };
       console.log(credentials);
-      // const res = await this.axios.post("login", credentials);
-      // const data = res.data;
-      // if (data.status === 400) {
-      //   console.log(data.err);
-      // } else {
-      //   this.$store.dispatch("saveToken", data.token);
-      //   this.$router.push({
-      //     name: "Login",
-      //   });
-      // }
+      const res = await this.axios.post("registro", credentials);
+      const data = res.data;
+      if (data.status === 400) {
+        console.log(data.err);
+      } else {
+        console.log(data.tokenMail);
+        // this.$store.dispatch("saveToken", data.token);
+        // this.toast(true);
+        this.$router.push({
+          name: "Login",
+        });
+      }
     },
+    // toast(append = false) {
+    //   this.$bvToast.toast('Correo de confirmación enviado con exito', {
+    //     title: 'Envio de correo',
+    //     toaster: "b-toaster-bottom-right",
+    //     appendToast: append,
+    //     variant: "success",
+    //     solid: true,
+    //   });
+    // },
   },
 };
 </script>
@@ -141,7 +153,7 @@ export default {
   right: 0;
   z-index: 1;
   display: block;
-  background-image: url(/img/icons/matrix.jpeg);
+  background-image: url(/img/icons/godi.jpg);
   /* -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   -o-filter: blur(5px);

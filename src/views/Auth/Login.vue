@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light vh-100 d-flex align-items-center bg-matrix">
+  <div class="vh-100 d-flex align-items-center bg-matrix">
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-xl-4 mx-auto">
@@ -103,7 +103,8 @@ export default {
   right: 0;
   z-index: 1;
   display: block;
-  background-image: url(/img/icons/matrix.jpeg);
+  background-image: url(/img/icons/godi.jpg);
+
   /* -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   -o-filter: blur(5px);
