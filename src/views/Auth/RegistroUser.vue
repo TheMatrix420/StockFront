@@ -1,108 +1,100 @@
 <template>
-  <b-container>
-    <b-row class="vh-100" align-v="center" align-h="center">
-      <b-card class="border-1 " style="max-width: 22rem;">
-        <div class="text-muted text-center mt-2 mb-0">
-          <h3>Matrixtock</h3>
+  <div class="bg-light vh-100 d-flex align-items-center bg-matrix">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-xl-4 mx-auto">
+          <div class="card border-0">
+            <div class="card-body py-5">
+              <h2 class="text-center font-weight-bold text-dark mb-3">
+                Matrixtock
+              </h2>
+              <form @submit.prevent="Register">
+                <div class="form-group">
+                  <label class="d-flex justify-content-start">Nombre</label>
+                  <div class="bv-no-focus-ring">
+                    <input
+                      id="input-first_name"
+                      type="text"
+                      placeholder="Ingresa tu nombre"
+                      class="form-control"
+                      v-model="form.first_name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="d-flex justify-content-start">Apellido</label>
+                  <div class="bv-no-focus-ring">
+                    <input
+                      id="input-last_name"
+                      type="text"
+                      placeholder="Ingresa tu apellido"
+                      class="form-control"
+                      v-model="form.last_name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="d-flex justify-content-start"
+                    >Correo electrónico</label
+                  >
+                  <div class="bv-no-focus-ring">
+                    <input
+                      id="input-email"
+                      type="email"
+                      placeholder="Ingresa tu correo"
+                      class="form-control"
+                      v-model="form.email"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <label class="d-flex justify-content-start">Contraseña</label>
+                  <div class="bv-no-focus-ring">
+                    <input
+                      id="input-password"
+                      type="password"
+                      placeholder="Ingresa tu contraseña"
+                      class="form-control"
+                      maxlength="20"
+                      v-model="form.password"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <label class="d-flex justify-content-start"
+                    >Repite tu contraseña</label
+                  >
+                  <div class="bv-no-focus-ring">
+                    <input
+                      id="input-password2"
+                      type="password"
+                      placeholder="Repite tu contraseña"
+                      class="form-control"
+                      maxlength="20"
+                      v-model="form.password2"
+                      required
+                    />
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-success mb-2">
+                  Registrarse
+                </button>
+                <a href="/home" class="text-decoration-none">
+                  <button type="button" class="btn btn-block btn-link">
+                    Volver
+                  </button>
+                </a>
+              </form>
+            </div>
+          </div>
         </div>
-        <b-card-body class="">
-          <b-form>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend is-text>
-                <b-icon icon="person"></b-icon>
-              </b-input-group-prepend>
-              <b-form-input
-                type="text"
-                placeholder="Ingrese Su Nombre"
-                v-model="form.firt_name"
-              >
-              </b-form-input>
-            </b-input-group>
-
-            <b-input-group class="mb-3">
-              <b-input-group-prepend is-text>
-                <b-icon icon="person"></b-icon>
-              </b-input-group-prepend>
-              <b-form-input
-                type="text"
-                placeholder="Ingrese su apellido"
-                v-model="form.last_name"
-              >
-              </b-form-input>
-            </b-input-group>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend is-text>
-                <b-icon icon="envelope"></b-icon>
-              </b-input-group-prepend>
-              <b-form-input
-                type="email"
-                :rules="{ required: true, email: true }"
-                placeholder="Ejemplo@hotmail.com"
-                v-model="form.email"
-              >
-              </b-form-input>
-            </b-input-group>
-
-            <b-input-group class="mb-3">
-              <b-input-group-prepend is-text>
-                <b-icon icon="lock-fill"></b-icon>
-              </b-input-group-prepend>
-              <b-form-input
-                name="Password"
-                :rules="{ required: true, min: 6 }"
-                type="password"
-                placeholder="Ingrese su contraseña"
-              >
-              </b-form-input>
-            </b-input-group>
-
-            <b-input-group class="mb-3">
-              <b-input-group-prepend is-text>
-                <b-icon icon="lock-fill"></b-icon>
-              </b-input-group-prepend>
-              <b-form-input
-                name="Password"
-                :rules="{ required: true, min: 6 }"
-                type="password"
-                placeholder="Repita su Contraseña"
-                v-model="form.password"
-              >
-              </b-form-input>
-            </b-input-group>
-
-            <b-row class="justify-content-center">
-              <div class="mr-2 mb-1">
-                <b-button @click="Login()" variant="success"
-                  >Registrarse</b-button
-                >
-              </div>
-              <div class="ml-2">
-                 <router-link to="/" class="btn btn-primary">Volver</router-link>
-              </div>
-            </b-row>
-            <hr class="border" />
-            <div class="text-center text-muted ">
-              <small>O Registrarse con</small>
-            </div>
-            <div class="btn-wrapper text-center">
-              <a href="#" class="btn btn-neutral btn-icon">
-                <span class="btn-inner--icon"
-                  ><img src="img/icons/github.svg"
-                /></span>
-                <span class="btn-inner--text">Github</span>
-              </a>
-              <a href="#" class="btn btn-neutral btn-icon">
-                <span class="btn-inner--icon"
-                  ><img src="img/icons/google.svg"
-                /></span>
-                <span class="btn-inner--text">Google</span>
-              </a>
-            </div>
-          </b-form>
-        </b-card-body>
-      </b-card>
-    </b-row>
-  </b-container>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -110,63 +102,59 @@ export default {
   data() {
     return {
       form: {
-        firt_name: "",
+        first_name: "",
         last_name: "",
         email: "",
         password: "",
+        password2: "",
       },
     };
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
-      // Reset our form values
-      this.form.firt_name = "";
-      this.form.last_name = "";
-      this.form.email = "";
-      this.form.password = "";
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
+    async Register() {
+      const credentials = {
+        first_name: this.form.first_name,
+        last_name: this.form.last_name,
+        email: this.form.email,
+        password: this.form.password,
+      };
+      console.log(credentials);
+      // const res = await this.axios.post("login", credentials);
+      // const data = res.data;
+      // if (data.status === 400) {
+      //   console.log(data.err);
+      // } else {
+      //   this.$store.dispatch("saveToken", data.token);
+      //   this.$router.push({
+      //     name: "Login",
+      //   });
+      // }
     },
   },
 };
-
-//   data() {
-//     return {};
-//   },
-//   methods: {
-//     Registro() {
-//       this.axios
-//         .post("login", {
-//           firt_name: this.form.firt_name,
-//           last_name: this.form.last_name,
-//           email: this.form.email,
-//           password: this.form.password,
-//         })
-//         .then((res) => {
-//           return res.data;
-//         })
-//         .then((data) => {
-//           if (data.status === 200) {
-//             this.$store.dispatch("saveToken", data.token);
-//             this.$router.push({
-//               name: "Home",
-//             });
-//           } else {
-//             let err = {
-//               code: data.status,
-//               message: data.err.message,
-//             };
-//             throw err;
-//           }
-//         })
-//         .catch((err) => {
-//           console.log(err);
-//         });
-//     },
-//   },
 </script>
+
+<style scoped>
+.bg-matrix {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: block;
+  background-image: url(/img/icons/matrix.jpeg);
+  /* -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px); */
+}
+
+/* .content-matrix {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  margin-left: 20px;
+  margin-right: 20px;
+} */
+</style>
