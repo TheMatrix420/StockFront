@@ -4,6 +4,7 @@ import Home from "../views/Home";
 import About from "../views/About";
 import Login from "../views/Auth/Login";
 import RegistroUser from "../views/Auth/RegistroUser";
+import ValidarCuenta from "../views/Auth/EmailRegistro";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -43,6 +44,15 @@ const routes = [
     component: RegistroUser,
     meta: {
       title: "Registro Usuario",
+      auth: false,
+    },
+  },
+  {
+    path: "/ValidarCuenta/:token",
+    name: "Validar Cuenta",
+    component: ValidarCuenta,
+    meta: {
+      title: "Validar Cuenta",
       auth: false,
     },
   },
