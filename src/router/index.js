@@ -48,7 +48,7 @@ const routes = [
     },
   },
   {
-    path: "/ValidarCuenta/:token",
+    path: "/validarCuenta/:token",
     name: "Validar Cuenta",
     component: ValidarCuenta,
     meta: {

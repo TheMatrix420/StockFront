@@ -24,9 +24,9 @@ export default {
     },
     mounted(){
         console.log('metodo mounted')
-        this.Condirmar()
+        this.Confirmar()
     }, methods: {
-    Condirmar() {
+    Confirmar() {
       this.axios
         .get(`confirmar/${this.$route.params.token}`)
         .then((res) => {
