@@ -13,6 +13,7 @@
                   <label class="d-flex justify-content-start"
                     >Correo electrónico</label
                   >
+                  <div id='status'></div>
                   <div class="bv-no-focus-ring">
                     <input
                       id="input-email"
@@ -50,7 +51,7 @@
               <div class="border my-3"></div>
               <div class="text-center text-muted">
                 <small>Inicia sesión con</small>
-                <a href="#" class="mx-2">
+                <a href="#" class="mx-2" @click="LoginFacebook()">
                   <img src="img/icons/facebook.svg" width="7%" />
                 </a>
                 <a href="#" class="mx-2">
@@ -66,6 +67,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import store from '../../store'
+import router from '../../router'
 export default {
   data() {
     return {
@@ -81,19 +85,76 @@ export default {
         email: this.form.email,
         password: this.form.password,
       };
-      const res = await this.axios.post("login", credentials);
+      const res = await axios.post("login", credentials);
       const data = res.data;
       if (data.status === 400) {
         console.log(data.err);
       } else {
-        this.$store.dispatch("saveToken", data.token);
-        this.$router.push({
+        store.dispatch("saveToken", data.token);
+        router.push({
           name: "Home",
         });
       }
-    },
+    },LoginFacebook(){
+
+      FB.login(function(response){
+        if(response.status == 'connected'){
+          checkLoginStatus(response.authResponse)
+        }
+      } ,{scope:'public_profile,email'})
+
+      function checkLoginStatus(response){
+        FB.api('/me?fields=id,email,name,first_name,last_name,picture.type(large)',async function(userData){
+          const user ={
+            email : userData.email,
+            first_name : userData.first_name,
+            last_name : userData.last_name,
+            picture : userData.picture.data.url
+          }
+          
+          const res = await axios.post("loginFacebook", user);
+          const data = res.data;
+          
+          if (data.status === 200) {
+            store.dispatch("saveToken", data.token);
+            logout(response)
+            router.push({
+              name: "Home",
+            });
+          } else {
+            console.log(data.err);
+          } 
+        }) 
+      }
+
+      function logout(user){
+        FB.api('/me/permissions', 'delete', { access_token: user.accessToken }, (r) => {
+          if(r.success) user.accessToken = null; 
+          FB.getLoginStatus(function (res) { }, true);
+        });
+      }
+    }
   },
 };
+
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '358921788786000',
+      cookie     : true,
+      status     : false,
+      xfbml      : true,
+      version    : "v8.0",
+    });
+  };
+
+    (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
 </script>
 
 <style scoped>

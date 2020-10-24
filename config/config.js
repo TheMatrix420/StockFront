@@ -9,3 +9,6 @@ if (process.env.NODE_ENV === "dev") {
 } else {
   process.env.URL_BASE = process.env.URL_BASE;
 }
+
+//API FACEBOOK
+process.env.ID_FACEBOOK = process.env.ID_FACEBOOK || '358921788786000'
